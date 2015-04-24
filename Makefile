@@ -28,10 +28,14 @@ include $(DEVKITARM)/3ds_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source
+SOURCES		:=	source source/libkhax
 DATA		:=	data
 INCLUDES	:=	include
 
+APP_TITLE	:=	blargSnes
+APP_DESCRIPTION := blargSnes -- SNES emulator
+APP_AUTHOR	:=	StapleButter
+ICON		:=	icon.png
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------

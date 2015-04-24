@@ -52,7 +52,7 @@
 
 #include "version.h"
 
-
+#include "libkhax/khax.h"
 
 u32* gpuOut;
 u32* gpuDOut;
@@ -851,6 +851,8 @@ int main()
 	gfxSet3D(false);
 	bglInit();
 	RenderState = 0;
+
+	khaxInit();
 	
 	vertexBuf = linearAlloc(0x40000 * 4);
 	vertexPtr = vertexBuf;
