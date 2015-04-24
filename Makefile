@@ -133,7 +133,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).3dsx $(OUTPUT).smdh $(TARGET).elf
+	@rm -fr $(BUILD) $(TARGET).3dsx $(OUTPUT).smdh $(TARGET).elf $(TARGET).3ds $(TARGET).cia
 
 
 #---------------------------------------------------------------------------------
@@ -144,13 +144,20 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-ifeq ($(strip $(NO_SMDH)),)
-$(OUTPUT).3dsx	:	$(OUTPUT).elf $(OUTPUT).smdh
-else
-$(OUTPUT).3dsx	:	$(OUTPUT).elf
-endif
+ 
+$(OUTPUT).3dsx	:	$(OUTPUT).elf $(OUTPUT).smdh $(OUTPUT).cia $(OUTPUT).3ds
 
 $(OUTPUT).elf	:	$(OFILES)
+
+$(OUTPUT).cia	: 	$(OUTPUT).elf
+	@cp $(OUTPUT).elf $(TARGET)_stripped.elf
+	@$(PREFIX)strip $(TARGET)_stripped.elf
+	$(TOPDIR)/cci/makerom -f cia -o $(OUTPUT).cia -rsf $(TOPDIR)/cci/build_cia.rsf -target t -exefslogo -elf $(TARGET)_stripped.elf -icon $(TOPDIR)/cci/icon.bin -banner $(TOPDIR)/cci/banner.bin
+
+$(OUTPUT).3ds	: 	$(OUTPUT).elf
+	@cp $(OUTPUT).elf $(TARGET)_stripped.elf
+	@$(PREFIX)strip $(TARGET)_stripped.elf
+	$(TOPDIR)/cci/makerom -f cci -o $(OUTPUT).3ds -rsf $(TOPDIR)/cci/gw_workaround.rsf -target d -exefslogo -elf $(TARGET)_stripped.elf -icon $(TOPDIR)/cci/icon.bin -banner $(TOPDIR)/cci/banner.bin
 
 #---------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data

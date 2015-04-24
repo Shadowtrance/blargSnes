@@ -5,9 +5,9 @@ BasicInfo:
   ContentType             : Application
   Logo                    : Nintendo # Nintendo / Licensed / Distributed / iQue / iQueForSystem
 
-Rom:
+#Rom:
   # Specifies the root path of the file system to include in the ROM.
-  #HostRoot                : "romfs"
+  # HostRoot                : "romfs"
 
 
 TitleInfo:
@@ -15,9 +15,9 @@ TitleInfo:
   Category                : Application
   
 CardInfo:
-  MediaSize               : 128MB # 128MB / 256MB / 512MB / 1GB / 2GB / 4GB
+  MediaSize               : 128MB # 128MB / 256MB / 512MB / 1GB / 2GB / 4GB / 8GB / 16GB / 32GB
   MediaType               : Card1 # Card1 / Card2
-  CardDevice              : NorFlash # NorFlash(Pick this if you use savedata) / None
+  CardDevice              : None # NorFlash(Pick this if you use savedata) / None
   
 
 Option:
@@ -25,6 +25,7 @@ Option:
   MediaFootPadding        : false # If true CCI files are created with padding
   EnableCrypt             : true # Enables encryption for NCCH and CIA
   EnableCompress          : true # Compresses exefs code
+
 
 ExeFs: # these are the program segments from the ELF, check your elf for the appropriate segment names
   ReadOnly: 
@@ -42,10 +43,10 @@ PlainRegion: # only used with SDK ELFs
  - .module_id
   
 AccessControlInfo:
-  #UseExtSaveData : true
-  #ExtSaveDataId: 0xff3ff
-  #UseExtendedSaveDataAccessControl: true
-  #AccessibleSaveDataIds: [0x101, 0x202, 0x303, 0x404, 0x505, 0x606]
+  # UseExtSaveData : true
+  # ExtSaveDataId: 0xff3ff
+  # UseExtendedSaveDataAccessControl: true
+  # AccessibleSaveDataIds: [0x101, 0x202, 0x303, 0x404, 0x505, 0x606]
 
 SystemControlInfo:
   SaveDataSize: 128KB
@@ -59,6 +60,7 @@ AccessControlInfo:
    - Debug
    - DirectSdmc
    - DirectSdmcWrite
+   - CategoryFileSystemTool
    
   IdealProcessor                : 0
   AffinityMask                  : 1
@@ -142,8 +144,6 @@ AccessControlInfo:
    - cam:u
    - cecd:u
    - cfg:u
-   - dlp:FKCL
-   - dlp:SRVR
    - dsp::DSP
    - frd:u
    - fs:USER
@@ -160,7 +160,12 @@ AccessControlInfo:
    - ssl:C
    - y2r:u
    - ldr:ro
+   - ir:rst
+   - ir:u
    - ir:USER
+   - am:u
+   - csnd:SND
+   - ns:s
   
    
 SystemControlInfo:
@@ -220,15 +225,15 @@ CommonHeaderKey:
     9veoARRAdxRJK12EpcSoEM1LhTRYdJnSRCY3x3p6YIV3c+l1sWvaQwKt0sZ/U
     8TTDx2gb9g7r/+U9icneu/zlqUpSkexCS009Q==
   Descriptor: |
-    AP///wAABAACAAAAAAAFGJ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIAAAAAAAABBUFQ6VQAAACRo
-    aW9GSU8AJGhvc3RpbzAkaG9zdGlvMWFjOnUAAAAAYm9zczpVAABjYW06dQAA
-    AGNlY2Q6dQAAY2ZnOnUAAABkbHA6RktDTGRscDpTUlZSZHNwOjpEU1BmcmQ6
-    dQAAAGZzOlVTRVIAZ3NwOjpHcHVoaWQ6VVNFUmh0dHA6QwAAbWljOnUAAABu
-    ZG06dQAAAG5ld3M6dQAAbndtOjpVRFNwdG06dQAAAHB4aTpkZXYAc29jOlUA
-    AABzc2w6QwAAAHkycjp1AAAAbGRyOnJvAABpcjpVU0VSAAAAAAAAAAAAAAAA
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    AAAAAAAAAABOn/rw/7//8ec/APIA8JH/APaR/1D/gf9Y/4H/cP+B/3j/gf8B
-    AQD/AAIA/iECAPz/////////////////////////////////////////////
-    ////////////////////////////////////////AAAAAAAAAAAAAAAAAAAA
-    AAADAAAAAAAAAAAAAAAAAAI=
+    AP///wAABAACAAAAAAAFGJ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjIAAAAAAAABBUFQ6VQAAACRoaW
+    9GSU8AJGhvc3RpbzAkaG9zdGlvMWFjOnUAAAAAYm9zczpVAABjYW06dQAAAGN
+    lY2Q6dQAAY2ZnOnUAAABpcjpyc3QAAGlyOnUAAAAAZHNwOjpEU1BmcmQ6dQAA
+    AGZzOlVTRVIAZ3NwOjpHcHVoaWQ6VVNFUmh0dHA6QwAAbWljOnUAAABuZG06d
+    QAAAG5ld3M6dQAAbndtOjpVRFNwdG06dQAAAHB4aTpkZXYAc29jOlUAAABzc2
+    w6QwAAAHkycjp1AAAAbGRyOnJvAABpcjpVU0VSAGFtOnUAAAAAY3NuZDpTTkR
+    uczpzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AABOn/rw/7//8ec/APIA8JH/APaR/1D/gf9Y/4H/cP+B/3j/gf8BAQD/AAIA/
+    iECAPz///////////////////////////////////////////////////////
+    //////////////////////////////AAAAAAAAAAAAAAAAAAAAAAADAAAAAAA
+    AAAAAAAAAAAI=
